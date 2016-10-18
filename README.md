@@ -8,7 +8,7 @@ lamms2cssr-triclinic.sh only supports dump files in which the orthogonal box bou
 lammps2cssr-ortho.sh can convert dump files for simulations in which the box bounds are orthogonal (and not converted from a triclinic cell).
 
 ## Instructions
-Place trajectory snapshot in same directory as lammps2cssr\*.sh. At the top of lammps2cssr\*.sh, specify 1) the types of coordinates (fractional/Cartesian) to write to the .cssr and 2) the file extension for the dump files to convert. Then run lammps2cssr.sh.
+Place trajectory snapshot in same directory as lammps2cssr-{triclinic, orthogonal}.sh. At the top of lammps2cssr-{triclinic, orthogonal}.sh, specify 1) the types of coordinates (fractional/Cartesian) to write to the .cssr and 2) the file extension for the dump files to convert. Then run lammps2cssr.sh. Please be sure the script corresponds to the box bounds in the dump file(s), or any .cssr files produced will not be correct for the converted structure.
 
 ## Author
 Rocío Mercado
