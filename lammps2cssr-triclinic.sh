@@ -69,18 +69,17 @@ getBoxBounds()
   # zlo_bound zhi_bound yz
   ###########################################################################
   BoxBounds=($(grep -A 3 "BOX BOUNDS xy xz yz" $1))
-  xlo_bound=${BoxBounds[9]} 
-  xhi_bound=${BoxBounds[10]} 
-  ylo_bound=${BoxBounds[12]} 
-  yhi_bound=${BoxBounds[13]} 
-  zlo_bound=${BoxBounds[15]} 
-  zhi_bound=${BoxBounds[16]} 
-  xy=${BoxBounds[11]} 
-  xz=${BoxBounds[14]} 
-  yz=${BoxBounds[17]} 
-}
-
-
+  xlo_bound=$(printf "%.6f * 1\n" ${BoxBounds[9]} | bc -l)
+  xhi_bound=$(printf "%.6f * 1\n" ${BoxBounds[10]} | bc -l)
+  ylo_bound=$(printf "%.6f * 1\n" ${BoxBounds[12]} | bc -l)
+  yhi_bound=$(printf "%.6f * 1\n" ${BoxBounds[13]} | bc -l)
+  zlo_bound=$(printf "%.6f * 1\n" ${BoxBounds[15]} | bc -l)
+  zhi_bound=$(printf "%.6f * 1\n" ${BoxBounds[16]} | bc -l)
+  xy=$(printf "%.6f * 1\n" ${BoxBounds[11]} | bc -l)
+  xz=$(printf "%.6f * 1\n" ${BoxBounds[14]} | bc -l)
+  yz=$(printf "%.6f * 1\n" ${BoxBounds[17]} | bc -l)
+} 
+   
 getTriclinicBoxParameters()
 {
   ###########################################################################

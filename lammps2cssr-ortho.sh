@@ -67,9 +67,9 @@ getBoxBounds()
   # 0 gamma
   ###########################################################################
   BoxBounds=($(grep -A 3 "BOX BOUNDS pp pp pp" $1))
-  a=${BoxBounds[7]} 
-  b=${BoxBounds[9]} 
-  c=${BoxBounds[11]} 
+  a=$(printf "%.6f * 1\n" ${BoxBounds[7]} | bc -l)
+  b=$(printf "%.6f * 1\n" ${BoxBounds[9]} | bc -l)
+  c=$(printf "%.6f * 1\n" ${BoxBounds[11]} | bc -l)
 }
 
 
