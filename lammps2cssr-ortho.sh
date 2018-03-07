@@ -3,7 +3,7 @@
                           ### SET VARIABLES HERE ###                           
 ###############################################################################
 fractional=true # true for fractional, false for Cartesian
-lammpsTrjExt="lammpstrj"
+lammpsTrjExt="lammpstrj" # LAMMPS dump trajectory extension
 ###############################################################################
 
 
