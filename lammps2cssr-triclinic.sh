@@ -164,8 +164,7 @@ writeCartesianCSSR()
   echo "0 ${1%.lammpstrj} : ${1%.lammpstrj}" >> $cssrFile
   grep -A $8 "ITEM: ATOMS element x y z" $1 | tail -$8 > tmpCoordinates
   count=1
-  cat tmpCoordinates | while read line;
-  do
+  cat tmpCoordinates | while read line; do
     echo " $count $line  0  0  0  0  0  0  0  0  0.000000" >> tmpCSSR
     let count+=1
   done
@@ -187,8 +186,7 @@ writeFractionalCSSR()
   cellVolume=$(echo "sqrt(1.0 - $(cos $5)^2 - $(cos $6)^2 - $(cos $7)^2 + \
   2*$(cos $5)*$(cos $6)*$(cos $7))" | bc -l)
   count=1
-  cat tmpCoordinates | while read line;
-  do
+  cat tmpCoordinates | while read line; do
     lineList=(${line})
     xFrac=$(echo "${lineList[1]}/$2 - ${lineList[2]}*$(cos $7)/($2*$(sin $7)) \
     + ${lineList[3]}*($(cos $5)*$(cos $7) \
@@ -214,20 +212,22 @@ writeFractionalCSSR()
   rm tmpCSSR tmpCoordinates
 }
 
+main()
+{
+  for i in *.${lammpsTrjExt}; do
+    getBoxBounds $i
+    getTriclinicBoxParameters $xlo_bound $xhi_bound $ylo_bound $yhi_bound \
+      $zlo_bound $zhi_bound $xy $xz $yz
+    getBoxSize $xhi $xlo $yhi $ylo $zhi $zlo 
+    getLatticeConstants $lx $ly $lz $xy $xz $yz
+    getLatticeAngles $b $c $ly $xy $xz $yz
+    atomsInStructure=$(getNumberOfAtoms $i)
+    if $fractional ; then
+      writeFractionalCSSR $i $a $b $c $alpha $beta $gamma $atomsInStructure
+    else
+      writeCartesianCSSR $i $a $b $c $alpha $beta $gamma $atomsInStructure
+    fi 
+  done
+}
 
-for i in *.${lammpsTrjExt}
-do
-  getBoxBounds $i
-  getTriclinicBoxParameters $xlo_bound $xhi_bound $ylo_bound $yhi_bound \
-    $zlo_bound $zhi_bound $xy $xz $yz
-  getBoxSize $xhi $xlo $yhi $ylo $zhi $zlo 
-  getLatticeConstants $lx $ly $lz $xy $xz $yz
-  getLatticeAngles $b $c $ly $xy $xz $yz
-  atomsInStructure=$(getNumberOfAtoms $i)
-  if $fractional ; then
-    writeFractionalCSSR $i $a $b $c $alpha $beta $gamma $atomsInStructure
-  else
-    writeCartesianCSSR $i $a $b $c $alpha $beta $gamma $atomsInStructure
-  fi 
-done
-
+main
