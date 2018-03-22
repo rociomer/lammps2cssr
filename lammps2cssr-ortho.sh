@@ -2,7 +2,7 @@
 
                           ### SET VARIABLES HERE ###                           
 ###############################################################################
-fractional=true # true for fractional, false for Cartesian
+FRACTIONAL=true # true for fractional, false for Cartesian
 lammpsTrjExt="lammpstrj" # LAMMPS dump trajectory extension
 ###############################################################################
 
@@ -141,13 +141,13 @@ writeFractionalCSSR()
 
 main()
 {
-  for i in *.${lammpsTrjExt}; do
+  for i in *.$lammpsTrjExt; do
     getBoxBounds $i
     atomsInStructure=$(getNumberOfAtoms $i)
     alpha=90.0
     beta=90.0
     gamma=90.0
-    if $fractional ; then
+    if $FRACTIONAL ; then
       writeFractionalCSSR $i $a $b $c $alpha $beta $gamma $atomsInStructure
     else
       writeCartesianCSSR $i $a $b $c $alpha $beta $gamma $atomsInStructure

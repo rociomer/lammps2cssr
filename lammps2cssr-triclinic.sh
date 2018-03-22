@@ -2,7 +2,7 @@
 
                           ### SET VARIABLES HERE ###                           
 ###############################################################################
-fractional=true # true for fractional, false for Cartesian
+FRACTIONAL=true # true for fractional, false for Cartesian
 lammpsTrjExt="lammpstrj" # LAMMPS dump trajectory extension
 ###############################################################################
 
@@ -214,7 +214,7 @@ writeFractionalCSSR()
 
 main()
 {
-  for i in *.${lammpsTrjExt}; do
+  for i in *.$lammpsTrjExt; do
     getBoxBounds $i
     getTriclinicBoxParameters $xlo_bound $xhi_bound $ylo_bound $yhi_bound \
       $zlo_bound $zhi_bound $xy $xz $yz
@@ -222,7 +222,7 @@ main()
     getLatticeConstants $lx $ly $lz $xy $xz $yz
     getLatticeAngles $b $c $ly $xy $xz $yz
     atomsInStructure=$(getNumberOfAtoms $i)
-    if $fractional ; then
+    if $FRACTIONAL ; then
       writeFractionalCSSR $i $a $b $c $alpha $beta $gamma $atomsInStructure
     else
       writeCartesianCSSR $i $a $b $c $alpha $beta $gamma $atomsInStructure
