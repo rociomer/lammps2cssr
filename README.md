@@ -20,14 +20,14 @@ BASH shell scripts for converting dump files from structural relaxations in
 Place trajectory snapshot in same directory as
  *lammps2cssr-{triclinic, orthogonal}.sh*. At the top of
  *lammps2cssr-{triclinic, orthogonal}.sh*, specify 1) the types of coordinates
- (fractional/Cartesian) to write to the .cssr and 2) the file extension for
- the dump files to convert. Then run the script. Please be sure the script
+ (fractional/Cartesian) to write to the CSSR and 2) the file extension for
+ the dump files to convert. Then run the script. Make sure the script
  corresponds to the type of box bounds in the dump files.
 
 ## Comments
 TODO: merge the triclinic and ortho scripts
 
-TODO: rewrite in Python, this is too slow (can take up to 30s for large
+TODO: rewrite in Python, this is too slow (can take up to 30 seconds for large
  structures)
 
 ## Author
